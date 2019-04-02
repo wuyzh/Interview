@@ -1,9 +1,9 @@
-###Activity
+### Activity
 - 生命周期全解析
 - 四种启动模式
 - IntentFilter匹配规则
 
-#####生命周期
+##### 生命周期
 **Activity的生命周期?**
 
 1.`onCreate()`
