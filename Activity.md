@@ -184,5 +184,5 @@ _采用隐式方式启动Activity时，可以用PackageManager的resolveActivity
 - Activity的启动过程最终回到ApplicationThread中，通过ApplicationThread.scheduleLaunchActivity() 将启动Activity的消息发送并交由Handler H处理。<br/>
 - Handler H对消息的处理会调用handleLaunchActivity()->performLaunchActivity()得以最终完成Activity的创建和启动。
 
-源码分析：[Activity的工作过程](https://links.jianshu.com/go?to=http%3A%2F%2Fblog.csdn.net%2Fzizidemenghanxiao%2Farticle%2Fdetails%2F50639025)
+源码分析：[Activity的工作过程](http://blog.csdn.net/zizidemenghanxiao/article/details/50639025)
 
