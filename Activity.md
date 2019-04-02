@@ -170,3 +170,19 @@ b.一个Activity可以有多个 intent-filter，一个 intent只要成功匹配�
 - data主要由mimeType(媒体类型)和URI组成。在匹配时通过intent.setDataAndType(Uri data, String type)方法对date进行设置
 
 _采用隐式方式启动Activity时，可以用PackageManager的resolveActivity方法或者Intent的resolveActivity方法判断是否有Activity匹配该隐式Intent。_
+## Activity的启动过程
+**Activity的启动过程?**
+>**技术点：**Activity启动、ActivityManagerServie、ApplicationThread
+思路：可大致介绍Activity启动过程涉及到的类，尤其是ActivityManagerServie、ApplicationThread从中发挥的作用。<br/>
+>**参考回答：**调用startActivity()后经过重重方法会转移到ActivityManagerService的startActivity()，并通过一个IPC回到ActivityThread的内部类ApplicationThread中，并调用其scheduleLaunchActivity()将启动Activity的消息发送并交由Handler H处理。Handler H对消息的处理会调用handleLaunchActivity()->performLaunchActivity()得以完成Activity对象的创建和启动。<br/>
+**引申：**由于ActivityManagerService是一个Binder对象，可引申谈谈Binder机制
+
+![流程图](https://github.com/wuyzh/Interview/blob/master/res/Activity启动流程图.jpeg?raw=true)
+**ActivityManagerService、ApplicationThread都是Binder。<br/>**
+
+- Application的创建也是通过Instrumentation来完成的，这个过程和Activity对象一样，都是通过类加载器来实现的。<br/>
+- Activity的启动过程最终回到ApplicationThread中，通过ApplicationThread.scheduleLaunchActivity() 将启动Activity的消息发送并交由Handler H处理。<br/>
+- Handler H对消息的处理会调用handleLaunchActivity()->performLaunchActivity()得以最终完成Activity的创建和启动。
+
+源码分析：[Activity的工作过程](https://links.jianshu.com/go?to=http%3A%2F%2Fblog.csdn.net%2Fzizidemenghanxiao%2Farticle%2Fdetails%2F50639025)
+
